@@ -1,0 +1,78 @@
+@keyframes slideIn {
+	0% {
+		top: -50px;
+	}
+	100% {
+		top: 0px;
+	}
+}
+
+header {
+	z-index: 140;
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	background-color: black;
+}
+
+nav {
+	display: flex;
+	width: 85%;
+	max-width: 800px;
+	margin: auto;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.status {
+	margin-right: 20px;
+	color: white;
+	transition: all 0.3s ease;
+	background-color: rgb(0, 0, 0, 0.3);
+}
+
+.navlogo {
+	z-index: 140;
+	animation: slideIn 0.2s ease;
+	margin-left: 20px;
+	margin-right: auto;
+	cursor: pointer;
+}
+
+.logo {
+	position: relative;
+	top: 2px;
+	width: 110px;
+}
+
+.navbtn {
+	animation: slideIn 0.2s ease;
+	color: white;
+	padding: 5px 12px 5px 12px;
+	margin: 10px;
+	margin-right: 20px;
+	border: 1px solid white;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	background-color: rgb(0, 0, 0, 0.3);
+}
+
+.navbtn:hover {
+	border: 1px solid rgb(0, 179, 255);
+}
+
+.clickout {
+	animation: fadeIn 0.5s;
+	z-index: 150;
+	padding: 10px;
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.5);
+}

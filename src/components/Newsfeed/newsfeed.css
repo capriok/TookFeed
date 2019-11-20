@@ -1,0 +1,177 @@
+li {
+	border: 1px solid rgb(255, 255, 255, 0.3);
+}
+
+.container {
+	animation: fadeIn 1s ease;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 25px;
+	margin: auto;
+	height: 100%;
+	width: 80%;
+	max-width: 800px;
+	list-style: none;
+	background-color: rgb(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 10px rgb(255, 255, 255, 0.1);
+}
+
+.badge{
+	margin: 15px 0px 0px -33px;
+	width: 60px;
+	position: absolute;
+}
+
+
+.post {
+	animation: fadeIn 1s ease;
+	width: 100%;
+	max-width: 800px;
+	margin-top: 20px;
+	background-color: rgb(0, 0, 0, 0.2);
+	box-shadow: 0px 3px 10px black;
+	overflow: hidden;
+}
+
+.title {
+	text-decoration: none;
+	animation: fadeIn 1s ease;
+	font-size: 1.2rem;
+	padding: 15px;
+	border-bottom: 2px rgb(53, 53, 53) solid;
+	box-shadow: 0px 0px 10px black;
+	background-color: rgba(0, 157, 255, 0.3);
+}
+
+.image img {
+	animation: fadeIn 1s ease;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	width: 60%;
+}
+
+.description {
+	animation: fadeIn 1s ease;
+	font-size: 1rem;
+	padding: 15px;
+	border-top: 2px rgb(53, 53, 53) solid;
+	box-shadow: 0px 0px 10px black;
+	background-color: rgba(0, 157, 255, 0.3);
+}
+
+.author {
+	animation: fadeIn 1s ease;
+	float: left;
+	font-size: 0.8rem;
+	padding: 10px 0px 5px 10px;
+}
+.updated {
+	animation: fadeIn 1s ease;
+	float: right;
+	font-size: 0.8rem;
+	padding: 5px 10px 10px 0px;
+}
+.pagination{
+	padding-top: 20px;
+	display: flex;
+	flex: 0 0 100%;
+	justify-content: space-between;
+	justify-content: center;
+}
+
+.pagebtn{
+	border:0px;
+	outline: 0px;
+	padding: 7px 15px 7px 15px;
+	margin:5px;
+	border-radius: 15px;
+	cursor:pointer;
+	background-color: rgb(255, 255, 255);
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+	
+}
+
+.selector{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-top:20px;
+}
+
+.selectorstatus {
+	display: flex;
+	flex: 50%;
+	margin: 18px 10px 0px 10px;
+	color: white;
+	transition: all 0.3s ease;
+}
+
+.feedform {	
+	display: flex;
+	flex: 40%;
+	margin-top: 10px;
+	padding: 5px;
+	width: 40%;
+	outline: 0px;
+	border:0px;
+	border-radius: 10px;
+	cursor:pointer;
+}
+
+.footer{
+	animation: fadeIn 1s ease;
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	align-items: center;
+	width:100% -10px;
+	padding: 10px;
+	bottom:0px;
+	background-color: black;
+}
+
+.footbtn{
+	cursor:pointer;
+	padding:5px 10px 5px 10px;
+	border:none;
+	border-bottom: 1px white solid;
+	color: white;
+	background-color: black;
+	transition: all 0.3s ease;
+}
+
+.marginer{padding: 10px;}
+
+.loadingcontainer{
+	z-index: 100;
+	position: absolute;
+	left:0px;
+	top:0px;
+	width: 100%;
+	height: 1000px;
+	background-color: rgb(50, 50, 50);
+}
+.spinner {
+	position: fixed;
+	top: 50%;
+  	left: 50%;
+  	margin-top: -20px;
+  	margin-left: -20px;
+	width: 40px;
+	height: 40px;
+	border: 3px solid rgba(233, 233, 233, 0.9);
+	border-radius: 50%;
+	border-top-color: rgba(0, 157, 255, 0.7);
+	animation: spin .5s linear infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}

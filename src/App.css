@@ -2,8 +2,7 @@ html {
 	color: white;
 	font-size: 1rem;
 	line-height: 1.4rem;
-	-webkit-user-select: none;
-	user-select: none;          
+	/* user-select: none; */
 }
 a {
 	color: white;
@@ -11,6 +10,20 @@ a {
 }
 body {
 	background-color: rgb(50, 50, 50);
+}
+
+.container {
+	animation: fadeIn 1s ease;
+	position: relative;
+	padding: 25px;
+	margin: auto;
+	margin-top:0px;
+	height: 100%;
+	width: 80%;
+	max-width: 800px;
+	list-style: none;
+	background-color: rgb(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 10px rgb(255, 255, 255, 0.1);
 }
 
 @keyframes fadeIn {

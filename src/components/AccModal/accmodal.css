@@ -2,16 +2,55 @@
 	animation: fadeIn 1s;
 	z-index: 200;
 	position: fixed;
-	overflow: hidden;
 	justify-content: center;
-	padding: 25px;
+	overflow: hidden;
+	padding:25px;
 	width: 400px;
+	height: 220px;
+	min-width: 400px;
 	max-width: 400px;
 	left: 50%;
 	top: 30vh;
 	transform: translate(-50%);
 	background-color: rgb(0, 0, 0);
 	box-shadow: 0px 0px 5px rgba(0, 157, 255, 1);
+	transition: .5s;
+}
+
+.reg{
+	height: 330px;
+	transition: .5s;
+}
+
+.logforms{position: absolute; top:15px;}
+.regforms{position: absolute; top:15px;}
+
+.logset{
+	position: relative;
+	transition: .5s;
+	left: 0px;
+	z-index: 202;
+}
+
+.logunset{
+	position: relative;
+	transition: .5s;
+	left:-450px;
+	z-index: 200;
+}
+
+.regset{
+	position: relative;
+	transition: .5s;
+	right: 0px;
+	z-index: 201;
+}
+
+.regunset{
+	position: relative;
+	transition: .5s;
+	right: -450px;
+	z-index: 200;
 }
 
 .modaltext {
@@ -26,36 +65,65 @@
 	border: 1px solid white;
 	border-radius: 5px;
 	cursor: pointer;
-	width: 100%;
+	width: 400px;
 	transition: all 0.3s ease;
 	background-color: rgb(0, 0, 0, 0.3);
 }
 
-.loginopen {
-	position: relative;
-	left: 100px;
+.accmodalbtn:hover{
+	border: 1px solid rgb(85, 204, 255);
 }
 
 .inputs {
-	padding: 10px;
+	margin: 10px 0px 10px 0px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
 .username {
-	width: 170px;
+	width:380px;
 	padding: 10px;
-	margin: 20px 5px 0px 0px;
+	outline: none;
+	margin: 0px 0px 5px 0px;
 }
 
 .password {
-	width: 170px;
+	width:380px;
 	padding: 10px;
-	margin: 10px 0px 0px 5px;
+	outline: none;
+	margin: 5px 0px 5px 0px;
 }
 
 .submit {
 	cursor: pointer;
-	margin-top: 10px;
 	margin-bottom: 20px;
 	padding: 10px;
-	width: 100%;
+	width: 400px;
+}
+
+.reqs{
+	display: flex;
+	text-align: center;
+	width:400px;
+	justify-content: space-around;
+}
+
+.reqs span{
+	font-size: 14px;
+}
+
+.reqs li{
+	font-size: 12px;
+	list-style: none;
+	justify-content: center;
+}
+
+/* .namereqs, .passreqs {
+	flex: 50%;
+} */
+
+.reqsUL, .reqsUV, .reqsPL, .reqsPV{
+	color: white;
+	transition: .3s;
 }

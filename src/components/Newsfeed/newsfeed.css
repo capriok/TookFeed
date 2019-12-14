@@ -2,19 +2,8 @@ li {
 	border: 1px solid rgb(255, 255, 255, 0.3);
 }
 
-.container {
-	animation: fadeIn 1s ease;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	padding: 25px;
-	margin: auto;
-	height: 100%;
-	width: 80%;
-	max-width: 800px;
-	list-style: none;
-	background-color: rgb(0, 0, 0, 0.5);
-	box-shadow: 0px 0px 10px rgb(255, 255, 255, 0.1);
+.feedwrap{
+	background-color: rgb(14, 14, 14);
 }
 
 .badge{
@@ -23,13 +12,39 @@ li {
 	position: absolute;
 }
 
+.selector{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.selectorstatus {
+	display: flex;
+	flex: 50%;
+	margin: 10px 0px 0px 0px;
+	color: white;
+	transition: all 0.3s ease;
+}
+
+.feedform {	
+	display: flex;
+	flex: 40%;
+	margin-top: 5px;
+	padding: 5px;
+	width: 40%;
+	outline: 0px;
+	border:0px;
+	border-radius: 10px;
+	cursor:pointer;
+}
 
 .post {
 	animation: fadeIn 1s ease;
 	width: 100%;
 	max-width: 800px;
 	margin-top: 20px;
-	background-color: rgb(0, 0, 0, 0.2);
+	background-color: rgb(20, 20, 20);
 	box-shadow: 0px 3px 10px black;
 	overflow: hidden;
 }
@@ -68,12 +83,14 @@ li {
 	font-size: 0.8rem;
 	padding: 10px 0px 5px 10px;
 }
+
 .updated {
 	animation: fadeIn 1s ease;
 	float: right;
 	font-size: 0.8rem;
-	padding: 5px 10px 10px 0px;
+	padding: 10px 10px 10px 0px;
 }
+
 .pagination{
 	padding-top: 20px;
 	display: flex;
@@ -94,33 +111,6 @@ li {
 	
 }
 
-.selector{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	margin-top:20px;
-}
-
-.selectorstatus {
-	display: flex;
-	flex: 50%;
-	margin: 18px 10px 0px 10px;
-	color: white;
-	transition: all 0.3s ease;
-}
-
-.feedform {	
-	display: flex;
-	flex: 40%;
-	margin-top: 10px;
-	padding: 5px;
-	width: 40%;
-	outline: 0px;
-	border:0px;
-	border-radius: 10px;
-	cursor:pointer;
-}
 
 .footer{
 	animation: fadeIn 1s ease;

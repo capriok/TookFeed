@@ -18,34 +18,18 @@ export default function NewsFeed() {
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(5)
   const [{ auth }] = useStateValue()
-  const [feed, setFeed] = useState('https://newsapi.org/v2/top-headlines?country=us&apiKey=64a57da735c94c7ca9b164ab5c3cb6e3')
+  const [feed, setFeed] = useState('https://newsapi.org/v2/top-headlines?country=us&apiKey=569386ab4fcf4954aee7dd0351c13cc0')
   const [articles, setArticles] = useState([]);
-  const [loading, isLoading] = useState(false)
-  const rand = Math.random()
-
-  const DropStatus = () => (
-    <>
-      {!auth.isAuthenticated ? (
-        <div className='selectorstatus'>Login to select Feeds</div>
-      ) : (
-          <div className='selectorstatus'>{auth.user.username}</div>
-        )}
-    </>
-  )
 
   const request = async () => {
     try {
       const res = await fetch(feed);
       const json = await res.json();
       let articles = json.articles.map(articles => articles);
-      setTimeout(() => {
-        setArticles(articles);
-        isLoading(false)
-      }, rand * 1000)
+      setArticles(articles);
     } catch (error) {
       console.log(error);
     }
-    isLoading(true)
   };
 
   useEffect(() => {
@@ -66,17 +50,11 @@ export default function NewsFeed() {
     window.scrollTo(0, 0);
   }
 
-  function handleFeatList() {
-
-  }
-
   return (
     <>
-      {loading && <div className='loadingcontainer'><div className='spinner'></div></div>}
-
-      <div className="container">
+      <div className="container feedwrap">
         <div className="selector">
-          <DropStatus />
+          <div className='selectorstatus'>{!auth.isAuthenticated ? 'Login to select Feeds' : auth.user.username}</div>
           <form className='feedform'>
             {!auth.isAuthenticated ? (
               <select className='feedform'>
@@ -155,22 +133,6 @@ export default function NewsFeed() {
         </div>
 
       </div>
-
-      {/* <div className="footer">
-        <a href="https://github.com/capriok"
-          target="_blank"
-          rel="noopener noreferrer">
-          <div className="footbtn">App Dev</div>
-        </a>
-        <div className="marginer"></div>
-        <div className="footbtn" onClick={handleFeatList}>Feature List</div>
-        <div className="marginer"></div>
-        <a href="https://newsapi.org/"
-          target="_blank"
-          rel="noopener noreferrer">
-          <div className="footbtn">API Credit</div>
-        </a>
-      </div> */}
     </>
   )
 }

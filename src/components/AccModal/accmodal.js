@@ -1,98 +1,203 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './accmodal.css'
-// import Login from './login.js'
-// import Register from './register.js'
 import { useStateValue } from '../../state'
 import axios from 'axios'
 
 function AccModal({ toggle }) {
-
+	let modaltitle = document.querySelector('.modaltext')
+	let reqsUL = document.querySelector('.reqsUL')
+	let reqsUV = document.querySelector('.reqsUV')
+	let reqsPL = document.querySelector('.reqsPL')
+	let reqsPV = document.querySelector('.reqsPV')
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const [auth, dispatch] = useStateValue()
 	const [registerOpen, setregisterOpen] = useState(false)
-	const toggleRegister = () => setregisterOpen(!registerOpen)
+	const [status, setStatus] = useState('')
+
+	const toggleRegister = () => {
+		setregisterOpen(!registerOpen)
+		setUsername('')
+		setPassword('')
+	}
+
+	const validate = () => {
+		let hasError = false
+		let oneUppercase = /(?=.*[A-Z])/
+		let notLetters = /[^a-zA-Z]+/g
+
+		if (username.length <= 2) {
+			reqsUL.style.color = 'red'
+			hasError = true
+		} else {
+			reqsUL.style.color = 'green'
+		}
+		if (notLetters.test(username) === true) {
+			reqsUV.style.color = 'red'
+			hasError = true
+		} else {
+			reqsUV.style.color = 'green'
+		}
+
+		if (password.length <= 4) {
+			reqsPL.style.color = 'red'
+			hasError = true
+		} else {
+			reqsPL.style.color = 'green'
+		}
+		if (oneUppercase.test(password) === false) {
+			reqsPV.style.color = 'red'
+			hasError = true
+		} else {
+			reqsPV.style.color = 'green'
+		}
+
+		return hasError
+	}
+
 
 	async function handleLogin(e) {
 		e.preventDefault()
-		axios
-			.post('http://localhost:5000/users/login', { username: username, password: password })
-			.then(res => {
-				localStorage.setItem('token', res.data.token)
-				localStorage.setItem('user', JSON.stringify(res.data.user))
-				dispatch({
-					type: 'login',
-					auth: {
-						isAuthenticated: true,
-						token: res.data.token,
-						user: res.data.user
-					}
+		if (username && password) {
+			let today = new Date().toLocaleString()
+			axios
+				.post('http://localhost:5000/users/login', { username: username, password: password })
+				.then(res => {
+					localStorage.setItem('token', res.data.token)
+					localStorage.setItem('user', JSON.stringify(res.data.user))
+					dispatch({
+						type: 'login',
+						auth: {
+							isAuthenticated: true,
+							token: res.data.token,
+							user: res.data.user
+						}
+					})
+					localStorage.setItem('lastLogin', today)
+					toggle()
 				})
-				toggle()
-			})
-			.catch((error) => {
-				console.log(error)
-				setStatus('Invalid username or password')
-			})
+				.catch((error) => {
+					console.log(error)
+					modaltitle.innerHTML = 'Invalid username or password'
+				})
+		}
 	}
-
-	const [status, setStatus] = useState(
-		'Enter a username and passord to login.'
-	)
 
 	async function handleRegister(e) {
 		e.preventDefault()
-		await axios
-			.post('http://localhost:5000/users/add', {
-				username: username,
-				password: password
-			})
-			.then((res) => {
-				console.log(res.data)
-				toggleRegister()
-				setStatus('Account created, you may login')
-				setUsername('')
-				setPassword('')
+		if (username && password) {
+			const err = validate()
+			if (username && !err) {
+				await axios
+					.post('http://localhost:5000/users/register', {
+						username: username,
+						password: password
+					})
+					.then((res) => {
+						console.log(res.data)
+						modaltitle.innerHTML = 'Account created, you may login'
+						toggleRegister()
+						setUsername('')
+						setPassword('')
+					})
+					.catch(error => {
+						console.error(error)
+					})
+				console.log('OK');
 
-			})
-			.catch(error => console.error(error))
+			} else { console.log('Errors found'); }
+		}
 	}
 
 	return (
 		<>
-			<div className='logcontent'>
-				<div>
-					<div>{<h3 className='modaltext'>
-						{registerOpen ? 'Enter a username and password to register.' : status}
-					</h3>}</div>
-					<form onSubmit={!registerOpen ? handleLogin : handleRegister}>
-						<input
-							onChange={e => setUsername(e.target.value)}
-							value={username}
-							type='text'
-							autoComplete='off'
-							className='username'
-							placeholder='Username'
-						/>
-						<input
-							onChange={e => setPassword(e.target.value)}
-							value={password}
-							type='password'
-							autoComplete='off'
-							className='password'
-							placeholder='Password'
-						/>
-						<br></br>
-						<button type='submit' className='submit'>
-							{!registerOpen ? 'Login' : 'Register'}
+			<div className={!registerOpen ? 'logcontent' : 'logcontent reg'}>
+
+				<div className="logforms">
+					<div className={!registerOpen ? 'logset' : 'logunset'}>
+						<div>{<h4 className='modaltext'>
+							Enter a username or password to login.
+						</h4>}</div>
+						<form onSubmit={handleLogin}>
+							<div className="inputs">
+								<input
+									onChange={e => setUsername(e.target.value.trim())}
+									value={username}
+									type='text'
+									autoComplete='off'
+									className='username'
+									placeholder='Username'
+								/>
+								<input
+									onChange={e => setPassword(e.target.value.trim())}
+									value={password}
+									type='password'
+									autoComplete='off'
+									className='password'
+									placeholder='Password'
+								/>
+							</div>
+							<button type='submit' className='submit'>
+								Login
 						</button>
-					</form>
+						</form>
+						<button className='accmodalbtn' onClick={toggleRegister}>
+							<h5 className='modaltext'>
+								Click here to create a new account.
+						</h5>
+						</button>
+					</div>
 				</div>
-				<button className='accmodalbtn' onClick={toggleRegister}>
-					<h5 className='modaltext'>
-						{!registerOpen ? 'Click here to create a new account.' : 'Click here to login.'}
-					</h5>
-				</button>
+
+				<div className="regforms">
+					<div className={registerOpen ? 'regset' : 'regunset'}>
+						<div>{<h4 className='modaltext'>
+							Meet all requirements to register.
+						</h4>}</div>
+						<form onSubmit={handleRegister}>
+							<div className="inputs">
+								<input
+									onChange={e => setUsername(e.target.value.trim())}
+									value={username}
+									type='text'
+									autoComplete='off'
+									className='username'
+									placeholder='Username'
+								/>
+								<input
+									onChange={e => setPassword(e.target.value.trim())}
+									value={password}
+									type='password'
+									autoComplete='off'
+									className='password'
+									placeholder='Password'
+								/>
+							</div>
+							<button type='submit' className='submit'>
+								Register
+						</button>
+						</form>
+						<div className="reqs">
+							<div className="namereqs">
+								<span>Username Requirements</span>
+								<li className='reqsUL'>Must be 3 characters long</li>
+								<li className='reqsUV'>Only Alphabetical Values</li>
+							</div>
+							<div className="passreqs">
+								<span>Password Requirements</span>
+								<li className='reqsPL'>Must be 5 characters long</li>
+								<li className='reqsPV'>At least one uppercase letter</li>
+							</div>
+						</div>
+						<br></br>
+						<button className='accmodalbtn' onClick={toggleRegister}>
+							<h5 className='modaltext'>
+								Click here to login.
+						</h5>
+						</button>
+					</div>
+				</div>
+
 			</div>
 		</>
 	)

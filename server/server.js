@@ -1,8 +1,6 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-//LOCAL SERVER IMPORTING LOGIN DATA, ERROR REACT (TRY)
-// const login = require('../client/src/components/Login/login')
 
 require('dotenv').config()
 
@@ -29,9 +27,6 @@ connection.once('open', () => {
 //ROUTES
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
-
-// const featuresRouter = require('./routes/features')
-// app.use('/features', featuresRouter)
 
 //SERVER PORT LISTENER
 app.listen(port, () => {

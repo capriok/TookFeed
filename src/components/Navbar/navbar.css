@@ -17,11 +17,26 @@ header {
 
 nav {
 	display: flex;
-	width: 85%;
-	max-width: 800px;
+	width: 90%;
+	max-width: 850px;
 	margin: auto;
 	align-items: center;
 	justify-content: flex-end;
+}
+
+.accountbtn {
+	color: white;
+	padding: 6px 10px 6px 10px;
+	margin: 10px;
+	border: 1px solid white;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100%;
+	transition: all 0.3s ease;
+	background-color: rgb(0, 0, 0, 0.3);
+}
+.accountbtn:hover{
+	border: 1px solid rgb(85, 204, 255);
 }
 
 .status {
@@ -34,7 +49,6 @@ nav {
 .navlogo {
 	z-index: 140;
 	animation: slideIn 0.2s ease;
-	margin-left: 20px;
 	margin-right: auto;
 	cursor: pointer;
 }
@@ -45,21 +59,16 @@ nav {
 	width: 110px;
 }
 
-.navbtn {
+.navicon {
 	animation: slideIn 0.2s ease;
 	color: white;
-	padding: 5px 12px 5px 12px;
-	margin: 10px;
-	margin-right: 20px;
-	border: 1px solid white;
-	border-radius: 5px;
+	width:20px;
+	padding: 5px;
+	padding-left:10px;
+	margin: 5px;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	background-color: rgb(0, 0, 0, 0.3);
-}
-
-.navbtn:hover {
-	border: 1px solid rgb(0, 179, 255);
 }
 
 .clickout {

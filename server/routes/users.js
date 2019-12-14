@@ -9,11 +9,14 @@ router.route('/').get((req, res) => {
 		.catch(err => res.status(400).json('Error: ' + err))
 })
 
-router.route('/add').post((req, res) => {
+router.route('/register').post((req, res) => {
 	const username = req.body.username
 	const password = req.body.password
-
-	const newUser = new User({ username, password })
+	let today = new Date().toLocaleDateString()
+	const joined = today
+	const rand = Math.floor(Math.random(5) * 100)
+	const seed = rand
+	const newUser = new User({ username, password, joined, seed })
 
 	newUser
 		.save()
@@ -38,8 +41,27 @@ router.route('/login').post(async (req, res) => {
 	}
 })
 
-router.route('/protected').get(authMiddleware, (req, res) => {
-	console.log(req.user.username + ' is authenticated')
+router.route('/update').post(async (req, res) => {
+	const id = req.body.id
+	const edit = req.body.username
+	console.log('Edit to =>', edit);
+	try {
+		const doc = await User.findByIdAndUpdate(id)
+		doc.username = edit;
+		await doc.save();
+		console.log('Edit successful')
+	} catch (error) {
+		console.log('No user by that ID.');
+	}
+})
+
+router.route('/delete').post(async (req, res) => {
+	const id = req.body.id
+	try {
+		await User.findByIdAndRemove(id)
+	} catch (error) {
+		console.log('No user by that ID.');
+	}
 })
 
 module.exports = router

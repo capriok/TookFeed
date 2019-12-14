@@ -2,9 +2,12 @@ import React from 'react'
 import './App.css'
 import Navbar from './components/Navbar/navbar.js'
 import Newsfeed from './components/Newsfeed/newsfeed.js'
+import Profile from './components/Profile/profile.js'
 import { StateProvider } from './state'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-function App() {
+
+export default function App() {
 	const initialState = {
 		auth: {
 			isAuthenticated: false,
@@ -33,9 +36,15 @@ function App() {
 	return (
 		<StateProvider initialState={initialState} reducer={reducer}>
 			<Navbar />
-			<Newsfeed />
+
+			<div className="container">
+				<Router>
+					<Switch>
+						<Route exact path="/" component={Newsfeed} />
+						<Route path="/profile" component={Profile} />
+					</Switch>
+				</Router>
+			</div>
 		</StateProvider>
 	)
 }
-
-export default App

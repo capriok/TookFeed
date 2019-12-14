@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useStateValue } from '../../state'
 import './navbar.css'
 import Logo from './img/logo.png'
+import Profile from './img/profile.png'
+import Logout from './img/logout.png'
 import AccModal from '../AccModal/accmodal.js'
 
 function Navbar() {
@@ -15,21 +17,23 @@ function Navbar() {
 	)
 
 	const LoginRegsterButton = props => (
-		<button onClick={props.click} className='navbtn'>
+		<button onClick={props.click} className='accountbtn'>
 			Login | Register
 		</button>
 	)
 
+	const ProfileButton = () => (
+		<a href="/profile"><img className='navicon' src={Profile} alt=""></img></a>
+	)
+
 	const LogoutButton = props => (
-		<>
-			<button className='navbtn' onClick={props.click}>
-				Logout
-			</button>
-		</>
+		<img className='navicon' label="Logout" onClick={logoutUser} src={Logout} alt=""></img>
 	)
 
 	const logoutUser = () => {
-		localStorage.clear()
+		localStorage.removeItem('token')
+		localStorage.removeItem('user')
+		window.location.href = '/'
 		dispatch({
 			type: 'logout'
 		})
@@ -61,7 +65,11 @@ function Navbar() {
 					</div>
 					<div>
 						{auth.isAuthenticated ? (
-							<LogoutButton click={logoutUser} />
+							<>
+
+								<ProfileButton />
+								<LogoutButton />
+							</>
 						) : (
 								<LoginRegsterButton click={toggleAccModal} />
 							)}

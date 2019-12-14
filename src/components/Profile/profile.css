@@ -1,0 +1,166 @@
+h3{
+	padding-bottom:5px;
+	color: rgb(154, 203, 224);
+	border-bottom:2px white solid;
+	user-select: none;
+}
+
+li{
+	border: none;
+	padding-top: 10px;
+	user-select: none;
+}
+
+
+.card {
+	animation: fadeIn 1s ease;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	max-width: 800px;
+	margin-top: 40px;
+	background-color: rgb(0, 0, 0, 0.2);
+	box-shadow: 0px 3px 10px black;
+	overflow: hidden;
+}
+
+.avatar{
+	border:1px white solid;
+	background-color: rgb(41, 41, 41);
+	padding:20px;
+	height: 350px;
+	flex: 46%;
+	max-width: 40%;
+}
+
+.ava{
+	width:100px;
+	border-radius: 50%;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+	padding: 10px 10px 0px;
+}
+
+.ava img { -webkit-user-drag: none; 
+  -khtml-user-drag: none; 
+  -moz-user-drag: none; 
+  -o-user-drag: none; 
+  user-drag: none; }
+
+.desc{
+	padding-top: 30px;
+	font-size: 15px;
+	display:block;
+   word-wrap:break-word;
+}
+
+.descriptioninput{
+	width: 100%;
+	margin-top: 20px;
+	box-sizing: border-box;
+	word-wrap: break-word;
+	color:white;
+	background-color: rgb(46, 46, 46);
+	border: 1px white solid;
+	padding:5px;
+	overflow: hidden;
+	resize: none;
+}
+
+.midspace{
+	width: 10px;
+}
+
+.overview{
+	border:1px white solid;
+	background-color: rgb(41, 41, 41);
+	padding:20px;
+	height: 350px;
+ 	flex: 46%;
+}
+
+.longspace{
+	flex: 40%;
+	height: 10px;
+}
+
+.descriptionbtn{
+	border: none;
+	background-color: transparent;
+	color: white;
+	cursor: pointer;
+	font-size: 12px;
+	position: relative;
+	float: right;
+	user-select: none;
+	transition: all 0.3s ease;
+}
+
+.descriptionbtn:hover {
+	color: rgb(85, 204, 255);
+}
+
+.settings{
+	flex: 100%;
+	background-color: rgb(41, 41, 41);
+	border:1px white solid;
+	padding:20px;
+	height: 350px;
+}
+
+.hpass{
+	margin-top: 20px;
+}
+
+.halfwrap{
+	margin-top: -8px;
+	width:50%;
+}
+
+.settingsinput{
+	width: 50%;
+	margin-top: 5px;
+	box-sizing: border-box;
+	word-wrap: break-word;
+	color:white;
+	background-color: rgb(46, 46, 46);
+	border: 1px white solid;
+	padding:5px;
+	overflow: hidden;
+	resize: none;
+	user-select: none;
+}
+
+.peek{
+	width: 20px;
+	margin-left: -30px;
+	cursor: pointer;
+}
+
+.change{
+	float: right;
+	cursor: pointer;
+	font-size: 12px;
+	transition: all 0.3s ease;
+}
+.change:hover{
+	color: rgb(85, 204, 255);
+}
+
+.left{
+	float: left;
+}
+
+.deletebtn{
+	margin-top:90px;
+	padding: 2px 0px 2px 0px;
+	border: 1px red solid;
+	width: 150px;
+	text-align: center;
+	font-size: 14px;
+	border-radius: 10px;
+	cursor: pointer;
+	color: white;
+	background-color: transparent;
+}

@@ -1,0 +1,126 @@
+.feedoptionscontainer{
+   padding: 20px;
+   margin: auto;
+   margin-bottom: 25px;
+   overflow: hidden;
+   transition: height .5s;
+	background-color: rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 3px 10px black;
+}
+
+.feedoptionscontent{
+   display: flex;
+   flex-wrap: wrap;
+   width: 100%;
+   box-shadow: 0px 3px 10px black;
+}
+
+.feedoptionscontent h4{
+   margin: 0px;
+   padding-bottom: 5px;
+   margin-bottom: 10px;
+   border-bottom: 1px black solid;
+}
+
+/* FEED OPTIONS HEADER */
+.feedophead{
+   flex: 100%;
+   text-align: center;
+   padding: 10px;
+   font-size: 22px;
+	background-color: rgba(0, 157, 255, 0.3);
+}
+/* HEADER END */
+
+/* FEED OPTIONS BODY */
+.feedopbody{
+	display: flex;
+   flex-wrap: wrap;
+   flex: 100%;
+   padding: 10px;
+	background-color: rgb(20, 20, 20);
+}
+
+/* TEXT INPUT */
+.foform{
+   flex: 40%;
+   padding: 10px;
+   margin: 5px;
+   border: 1px black solid;
+	background-color: rgb(30, 30, 30);
+}
+
+.foform input{
+   width: 100%;
+   padding: 5px;
+   box-sizing:border-box;
+   outline: none;
+}
+
+/* CHECKBOX INPUT */
+.focheckbox{
+   display: flex;
+   flex: 100%;
+   justify-content: space-evenly;
+   flex-wrap: wrap;
+   padding: 5px;
+   margin: 5px;
+   border: 1px black solid;
+	background-color: rgb(30, 30, 30);
+}
+
+.focheckbox input{
+   margin-right: 10px;
+}
+
+.focheckbox label{
+   margin: 0px 10px 0px 0px;
+   user-select: none;
+	cursor:pointer;
+}
+
+/* SELECTOR */
+.foselector{
+   flex: 40%;
+	padding: 10px;
+   margin: 5px;
+   border: 1px black solid;
+	background-color: rgb(30, 30, 30);
+}
+
+.foselector select{
+   width: 100%;
+	padding: 5px;
+	outline: 0px;
+	border:0px;
+	border-radius: 10px;
+	cursor:pointer;
+}
+
+/* SUBMIT BUTTON */
+.fosubmit{
+   margin: 5px;
+   flex: 100%;
+	padding: 10px;
+   border: 1px black solid;
+	background-color: rgba(0, 157, 255, 0.3);
+}
+
+.fosubmit button{
+	padding: 5px;
+	cursor:pointer;
+}
+
+.fosubmit span{
+   font-size: 14px;
+   text-decoration: underline;
+   margin:10px;
+   cursor: pointer;
+   transition: .3s;
+}
+
+.fosubmit span:hover{
+   color: rgba(255, 0, 0, 0.8);
+}
+
+/* BODY END */

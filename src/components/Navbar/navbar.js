@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useStateValue } from '../../state'
 import './navbar.css'
 import Logo from './img/logo.png'
-import Profile from './img/profile.png'
-import Logout from './img/logout.png'
+import Feeds from './img/navfeeds.png'
+import Profile from './img/navprofile.png'
+import Logout from './img/navlogout.png'
 import AccModal from '../AccModal/accmodal.js'
 
-function Navbar() {
+function Navbar({ toggleFO }) {
+	let feedOpDiv = document.getElementsByClassName('feedopcontainer')
 	const [accModalOpen, setAccModalOpen] = useState(false)
 	const [{ auth }, dispatch] = useStateValue()
 
@@ -17,18 +19,21 @@ function Navbar() {
 	)
 
 	const LoginRegsterButton = props => (
-		<button onClick={props.click} className='accountbtn'>
-			Login | Register
-		</button>
+		<button className='accountbtn' onClick={toggleAccModal}>Login | Register</button>
+	)
+
+	const FeedOptionsButton = () => (
+		<img className='navicon' onClick={toggleFO} src={Feeds} alt=""></img>
 	)
 
 	const ProfileButton = () => (
 		<a href="/profile"><img className='navicon' src={Profile} alt=""></img></a>
 	)
 
-	const LogoutButton = props => (
-		<img className='navicon' label="Logout" onClick={logoutUser} src={Logout} alt=""></img>
+	const LogoutButton = () => (
+		<img className='navicon' onClick={logoutUser} src={Logout} alt=""></img>
 	)
+
 
 	const logoutUser = () => {
 		localStorage.removeItem('token')
@@ -57,7 +62,7 @@ function Navbar() {
 	return (
 		<>
 			{accModalOpen && <Clickout onClick={toggleAccModal} />}
-			{accModalOpen && <AccModal toggle={toggleAccModal} />}
+			{accModalOpen && <AccModal toggleAccModal={toggleAccModal} />}
 			<header>
 				<nav>
 					<div className='navlogo'>
@@ -66,12 +71,12 @@ function Navbar() {
 					<div>
 						{auth.isAuthenticated ? (
 							<>
-
+								<FeedOptionsButton />
 								<ProfileButton />
 								<LogoutButton />
 							</>
 						) : (
-								<LoginRegsterButton click={toggleAccModal} />
+								<LoginRegsterButton />
 							)}
 					</div>
 				</nav>

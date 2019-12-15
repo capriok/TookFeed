@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './accmodal.css'
 import { useStateValue } from '../../state'
 import axios from 'axios'
 
-function AccModal({ toggle }) {
+function AccModal({ toggleAccModal }) {
 	let modaltitle = document.querySelector('.modaltext')
 	let reqsUL = document.querySelector('.reqsUL')
 	let reqsUV = document.querySelector('.reqsUV')
@@ -13,7 +13,6 @@ function AccModal({ toggle }) {
 	const [password, setPassword] = useState('')
 	const [auth, dispatch] = useStateValue()
 	const [registerOpen, setregisterOpen] = useState(false)
-	const [status, setStatus] = useState('')
 
 	const toggleRegister = () => {
 		setregisterOpen(!registerOpen)
@@ -74,7 +73,7 @@ function AccModal({ toggle }) {
 						}
 					})
 					localStorage.setItem('lastLogin', today)
-					toggle()
+					toggleAccModal()
 				})
 				.catch((error) => {
 					console.log(error)
@@ -112,7 +111,6 @@ function AccModal({ toggle }) {
 	return (
 		<>
 			<div className={!registerOpen ? 'logcontent' : 'logcontent reg'}>
-
 				<div className="logforms">
 					<div className={!registerOpen ? 'logset' : 'logunset'}>
 						<div>{<h4 className='modaltext'>

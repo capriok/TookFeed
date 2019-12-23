@@ -8,7 +8,6 @@ import Logout from './img/navlogout.png'
 import AccModal from '../AccModal/accmodal.js'
 
 function Navbar({ toggleFO }) {
-	let feedOpDiv = document.getElementsByClassName('feedopcontainer')
 	const [accModalOpen, setAccModalOpen] = useState(false)
 	const [{ auth }, dispatch] = useStateValue()
 
@@ -33,7 +32,6 @@ function Navbar({ toggleFO }) {
 	const LogoutButton = () => (
 		<img className='navicon' onClick={logoutUser} src={Logout} alt=""></img>
 	)
-
 
 	const logoutUser = () => {
 		localStorage.removeItem('token')

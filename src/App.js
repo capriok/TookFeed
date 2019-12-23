@@ -1,23 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Main.css'
 import { StateProvider } from './state'
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navbar from './components/Navbar/navbar.js'
 import Newsfeed from './components/Newsfeed/newsfeed.js'
 import Profile from './components/Profile/profile.js'
 import FeedOptions from './components/FeedOptions/feedoptions'
-
+import { Transition } from 'react-spring/renderprops'
+import { useStateValue } from './state'
 
 export default function App() {
-	const [feed, setFeed] = useState('https://newsapi.org/v2/top-headlines?country=us&apiKey=569386ab4fcf4954aee7dd0351c13cc0')
-	const [feedOptionsOpen, setFeedOptionsOpen] = useState(false)
-	const [contRef, setRef] = useState(React.createRef())
 
 	const initialState = {
 		auth: {
 			isAuthenticated: false,
 			token: '',
 			user: {}
+		},
+		endpoint: {
+			everything: false,
+			headlines: false,
+			sources: false
+		},
+		options: {
+			q: '',
+			sources: '',
+			category: '',
+			country: '',
+			to: '',
+			from: '',
+			language: '',
 		}
 	}
 
@@ -30,35 +42,94 @@ export default function App() {
 				}
 			case 'logout':
 				return {
-					...initialState
+					...initialState.auth
 				}
-
+			case 'filter':
+				return {
+					...state,
+					endpoint: action.endpoint
+				}
+			// case 'reset':
+			// 	return {
+			// 		...initialState.endpoint
+			// 	}
+			case 'pass':
+				return {
+					...state,
+					options: action.options
+				}
 			default:
 				return state
 		}
 	}
 
+	const [feed, setFeed] = useState(
+		'https://newsapi.org/v2/top-headlines?country=us&apiKey=569386ab4fcf4954aee7dd0351c13cc0'
+	)
+
+	const KEY = '569386ab4fcf4954aee7dd0351c13cc0';
+	const endpoint = initialState.endpoint
+	const options = initialState.options
+	const parseEndpoints = Object.values(endpoint)
+	// console.log(parseEndpoints);
+
+	const query = initialState.options.q
+	const sources = initialState.options.sources
+	const category = initialState.options.category
+	const country = initialState.options.country
+	const to = initialState.options.to
+	const from = initialState.options.from
+	const language = initialState.options.language
+
+	const [endpointE, setE] = useState(`https://newsapi.org/v2/${endpoint}?${'&' + query}${'&' + sources}${'&' + from}${'&' + to}?&apiKey=${KEY}`)
+	const [endpointH, setH] = useState(`https://newsapi.org/v2/${endpoint}?${'&' + query}${'&' + sources}${'&' + category}${'&' + country}?&apiKey=${KEY}`)
+	const [endpointS, setS] = useState(`https://newsapi.org/v2/${endpoint}?${'&' + category}${'&' + country}${'&' + language}?&apiKey=${KEY}`)
+
+
+	const [feedOptionsOpen, setFeedOptionsOpen] = useState(true)
+
 	const toggleFeedOptions = () => {
 		setFeedOptionsOpen(!feedOptionsOpen)
+		if (!feedOptionsOpen) {
+			window.scrollTo(0, 0)
+		}
 	}
+
+	const log = () => {
+		console.log(parseEndpoints)
+		console.log(options);
+
+	};
+
 
 	return (
 		<StateProvider initialState={initialState} reducer={reducer}>
-
 			<Navbar toggleFO={toggleFeedOptions} />
-
-			<div className="container">
+			<div className='container'>
 				<Router>
 					<Switch>
 						<Route
-							exact path="/"
-							render={() =>
+							exact
+							path='/'
+							render={() => (
 								<>
-									{feedOptionsOpen && <FeedOptions setFeed={setFeed} />}
-									<Newsfeed feed={feed} />
+									<Transition
+										items={feedOptionsOpen}
+										from={{ position: 'relative', marginTop: -500 }}
+										enter={{ position: 'relative', marginTop: 0, opacity: 1 }}
+										leave={{ position: 'relative', marginTop: -500, }}
+										config={{ duration: 200 }}>
+										{feedOptionsOpen => feedOptionsOpen && (props => <div style={props}>
+											<button onClick={log}>asdlkjhalkdja</button>
+											<FeedOptions setFeed={setFeed} />
+										</div>
+										)}
+									</Transition>
+									<Newsfeed feed={feed} open={feedOptionsOpen} />
 								</>
-							} />
-						<Route path="/profile" component={Profile} />
+							)}
+						/>
+						<Route path='/profile' component={Profile} />
 					</Switch>
 				</Router>
 			</div>

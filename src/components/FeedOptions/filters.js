@@ -56,18 +56,6 @@ export default function Filters(
 
    }, [handlesetFilters])
 
-   // useEffect(() => {
-   //    console.log(q);
-   //    console.log(sources);
-   //    console.log(category);
-   //    console.log(country);
-   //    console.log(startDate);
-   //    console.log(endDate);
-   //    console.log(language);
-   //    console.log(options);
-
-   // }, [q, sources, category, country, startDate, endDate, language])
-
    return (
       <>
          <div className='fofilter'>

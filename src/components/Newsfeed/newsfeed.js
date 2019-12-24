@@ -5,49 +5,12 @@ import badge from './img/badge.png'
 import newsapi from '../../apis/newsapi.js'
 
 
-export default function NewsFeed({ feed }) {
-	const [{ auth, endpoint, options }] = useStateValue()
+export default function NewsFeed() {
+	const [{ auth, endpoint, options }, dispatch] = useStateValue()
 	const [page, setPage] = useState(2)
 	const [start, setStart] = useState(0)
 	const [end, setEnd] = useState(5)
 	const [articles, setArticles] = useState([])
-
-
-
-
-	const request = async () => {
-		// try {
-		// 	const res = await fetch(feed)
-		// 	const json = await res.json()
-		// 	let articles = json.articles.map(articles => articles)
-		// 	setArticles(articles)
-		// } catch (error) {
-		// 	console.log(error)
-		// }
-
-		// const res = await newsapi
-		// 	.get(`/${filterType}`, {
-		// 		params: {
-		// 			q: source,
-		// 			category: 'politics',
-		// 			language: 'en',
-		// 			country: 'us'
-		// 		}
-		// 	})
-
-		// let articles = res.data.items
-
-	}
-
-	useEffect(() => {
-		request()
-
-		const filterType = Object.values(endpoint)
-		console.log(filterType);
-
-		const optionValues = Object.entries(options)
-		console.log(optionValues);
-	}, [feed])
 
 	function prevPage() {
 		setPage(page - 1)
@@ -62,6 +25,36 @@ export default function NewsFeed({ feed }) {
 		setEnd(end + 5)
 		window.scrollTo(0, 0)
 	}
+
+	const query = options.q
+	const sources = options.sources
+	const category = options.category
+	const country = options.country
+	const to = options.to
+	const from = options.from
+	const language = options.language
+
+	const request = async () => {
+		const KEY = '569386ab4fcf4954aee7dd0351c13cc0';
+		let type = Object.keys(endpoint).filter(k => endpoint[k])
+		if (type.toString() === 'headlines') {
+			type = `top-${type.shift()}`
+		}
+		let endpointType = type.toString()
+
+		const res = await newsapi
+			.get(`/${endpointType}`, {
+				params: {
+					q: query,
+					apiKey: KEY
+				}
+			})
+		console.log(res);
+
+		let articles = res.data.items
+		setArticles(articles)
+	}
+
 	return (
 		<>
 			<div className='feedwrap'>
@@ -100,6 +93,16 @@ export default function NewsFeed({ feed }) {
 		</>
 	)
 }
+
+
+////////////////////////////////////
+//LEGACY GET REQUEST FROM STATIC URL
+	// const feed = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=569386ab4fcf4954aee7dd0351c13cc0'
+	// 	const res = await fetch(feed)
+	// 	const json = await res.json()
+	// 	let articles = json.articles.map(articles => articles)
+	// 	setArticles(articles)	
+////////////////////////////////////
 
 /*
 			const NewsAPI = require('newsapi');

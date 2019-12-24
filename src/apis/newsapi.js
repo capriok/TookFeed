@@ -11,12 +11,6 @@ const KEY = '569386ab4fcf4954aee7dd0351c13cc0';
 // 5b0a5b215b5d472881c830c90648727c
 // 69ff4adfecfd476e88c3ec2964ed2861
 
-// export const baseParams = {
-//    part: "snippet",
-//    maxResults: 5,
-//    key: KEY
-// };
 export default axios.create({
-   baseURL: "https://newsapi.org/v2/top-headlines?country=us&apiKey=KEY",
-   // params: baseParams
+   baseURL: `https://newsapi.org/v2/`,
 });

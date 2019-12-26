@@ -53,11 +53,16 @@ export default function NewsFeed({ feedOptionsOpen }) {
 			.get(`/${endpointType}`, {
 				params: {
 					q: query,
+					sources: sources,
+					category: category,
 					country: country,
+					to: startDate,
+					from: endDate,
+					language: language,
 					apiKey: KEY
 				}
 			})
-		console.log(res);
+		console.log(res.data);
 
 		return setArticles(res.data.articles)
 	}
@@ -138,7 +143,6 @@ export default function NewsFeed({ feedOptionsOpen }) {
 		</>
 	)
 }
-
 
 //GET REQUEST FROM STATIC URL
 	// const feed = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=569386ab4fcf4954aee7dd0351c13cc0'

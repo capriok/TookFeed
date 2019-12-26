@@ -33,6 +33,7 @@ function Navbar({ toggleFO }) {
 		<img className='navicon' onClick={logoutUser} src={Logout} alt=""></img>
 	)
 
+
 	const logoutUser = () => {
 		localStorage.removeItem('token')
 		localStorage.removeItem('user')

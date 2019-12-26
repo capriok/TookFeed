@@ -1,16 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { useStateValue } from '../../state'
-import './newsfeed.css'
+import { Transition } from 'react-spring/renderprops'
 import badge from './img/badge.png'
 import newsapi from '../../apis/newsapi.js'
+import FeedOptions from '../FeedOptions/feedoptions.js'
+import './newsfeed.css'
 
-
-export default function NewsFeed() {
+export default function NewsFeed({ feedOptionsOpen }) {
 	const [{ auth, endpoint, options }, dispatch] = useStateValue()
 	const [page, setPage] = useState(2)
 	const [start, setStart] = useState(0)
 	const [end, setEnd] = useState(5)
 	const [articles, setArticles] = useState([])
+
+	const [query, setQuery] = useState()
+	const [sources, setSources] = useState()
+	const [category, setCategory] = useState()
+	const [country, setCountry] = useState()
+	const [startDate, setStartDate] = useState(new Date())
+	const [endDate, setEndDate] = useState(new Date())
+	const [language, setLanguage] = useState()
 
 	function prevPage() {
 		setPage(page - 1)
@@ -25,14 +34,6 @@ export default function NewsFeed() {
 		setEnd(end + 5)
 		window.scrollTo(0, 0)
 	}
-
-	const query = options.q
-	const sources = options.sources
-	const category = options.category
-	const country = options.country
-	const to = options.to
-	const from = options.from
-	const language = options.language
 
 	const request = async () => {
 		const KEY = '569386ab4fcf4954aee7dd0351c13cc0';
@@ -49,14 +50,60 @@ export default function NewsFeed() {
 					apiKey: KEY
 				}
 			})
-		console.log(res);
+		return setArticles(res.data.articles)
 
-		let articles = res.data.items
-		setArticles(articles)
 	}
+
+	const applyOptions = (e) => {
+		e.preventDefault()
+		dispatch({
+			type: 'pass',
+			options: {
+				q: query,
+				sources: sources,
+				category: category,
+				country: country,
+				to: startDate,
+				from: endDate,
+				language: language,
+			}
+		})
+		request()
+	}
+
+	useEffect(() => {
+		console.log(articles);
+		console.log(options);
+	}, [options])
 
 	return (
 		<>
+			<Transition
+				items={feedOptionsOpen}
+				from={{ position: 'relative', marginTop: -500 }}
+				enter={{ position: 'relative', marginTop: 0, opacity: 1 }}
+				leave={{ position: 'relative', marginTop: -500, }}
+				config={{ duration: 200 }}>
+				{feedOptionsOpen => feedOptionsOpen && (props => <div style={props}>
+					<FeedOptions
+						applyOptions={applyOptions}
+						query={query}
+						setQuery={setQuery}
+						sources={sources}
+						setSources={setSources}
+						category={category}
+						setCategory={setCategory}
+						country={country}
+						setCountry={setCountry}
+						startDate={startDate}
+						setStartDate={setStartDate}
+						endDate={endDate}
+						setEndDate={setEndDate}
+						language={language}
+						setLanguage={setLanguage} />
+				</div>
+				)}
+			</Transition>
 			<div className='feedwrap'>
 				{articles.slice(start, end).map((articles, index) => (
 					<li className='post' key={index}>
@@ -95,14 +142,12 @@ export default function NewsFeed() {
 }
 
 
-////////////////////////////////////
-//LEGACY GET REQUEST FROM STATIC URL
+//GET REQUEST FROM STATIC URL
 	// const feed = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=569386ab4fcf4954aee7dd0351c13cc0'
 	// 	const res = await fetch(feed)
 	// 	const json = await res.json()
 	// 	let articles = json.articles.map(articles => articles)
 	// 	setArticles(articles)	
-////////////////////////////////////
 
 /*
 			const NewsAPI = require('newsapi');

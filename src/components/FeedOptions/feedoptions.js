@@ -1,28 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { useStateValue } from '../../state'
-import './feedoptions.css'
-import Filters from './filters'
 import { Transition } from 'react-spring/renderprops'
+import Filters from './filters'
+import './feedoptions.css'
 
-export default function FeedOptions({ setFeed }) {
-	const [searchQuery, setSearchQuery] = useState('')
+export default function FeedOptions(
+	{
+		applyOptions,
+		query, setQuery,
+		sources, setSources,
+		category, setCategory,
+		country, setCountry,
+		startDate, setStartDate,
+		endDate, setEndDate,
+		language, setLanguage
+	}) {
 	const [advOpOpen, setadvOpOpen] = useState(true)
 
-	const [query, setQuery] = useState()
-	const [sources, setSources] = useState()
-	const [category, setCategory] = useState()
-	const [country, setCountry] = useState()
-	const [startDate, setStartDate] = useState(new Date())
-	const [endDate, setEndDate] = useState(new Date())
-	const [language, setLanguage] = useState()
 	const [{ endpoint, options }, dispatch] = useStateValue()
-
-	const headlineSearch = `https://newsapi.org/v2/everything?q=${searchQuery}&apiKey=569386ab4fcf4954aee7dd0351c13cc0`
-
-	const handleHeadlineSearch = (e) => {
-		e.preventDefault()
-		setFeed(headlineSearch)
-	}
 
 	const handleAdvOpDrop = () => {
 		dispatch({
@@ -35,27 +30,6 @@ export default function FeedOptions({ setFeed }) {
 		})
 		setadvOpOpen(!advOpOpen)
 	}
-
-	const applyOptions = (e) => {
-		e.preventDefault()
-		dispatch({
-			type: 'pass',
-			options: {
-				q: query,
-				sources: sources,
-				category: category,
-				country: country,
-				to: startDate,
-				from: endDate,
-			}
-		})
-	}
-
-	useEffect(() => {
-		console.log(endpoint);
-		console.log(options);
-	}, [applyOptions])
-
 	return (
 		<div className={'feedoptionscontainer'}>
 			<div className='feedoptionscontent'>
@@ -65,10 +39,7 @@ export default function FeedOptions({ setFeed }) {
 					<div className="fop">
 						<h4>Search Headlines</h4>
 						<div className='foform'>
-							<form onSubmit={handleHeadlineSearch}>
-								<input type='text' onChange={e => setSearchQuery(e.target.value)}></input>
-								<button>Search</button>
-							</form>
+							<input type='text'></input>
 						</div>
 					</div>
 					<div className="fop">

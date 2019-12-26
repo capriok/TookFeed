@@ -102,31 +102,28 @@ export default function Filters(
                leave={{ height: 0, opacity: 0 }}
                config={{ duration: 200 }}>
                {endpointOpen => endpointOpen && ((props) => <div style={props}>
-                  <form onSubmit={e => e.preventDefault()}>
-                     <div className="inputfilters">
-                        {endpoint.headlines || endpoint.everything ?
-                           <input type="text" placeholder="Search" value={query} onChange={e => setQuery(e.target.value)} /> : undefined
-                        }
-                        {endpoint.headlines || endpoint.everything ?
-                           <input type="text" placeholder="Sources" value={sources} onChange={e => setSources(e.target.value)} /> : undefined
-                        }
-                        {endpoint.headlines || endpoint.sources ?
-                           <input type="text" placeholder="Category" value={category} onChange={e => setCategory(e.target.value)} /> : undefined
-                        }
-                        {endpoint.headlines || endpoint.sources ?
-                           <input type="text" placeholder="Country" value={country} onChange={e => setCountry(e.target.value)} /> : undefined
-                        }
-                        {endpoint.everything &&
-                           <DatePicker placeholderText="Start Date" value={startDate} onChange={date => setStartDate(date)} selected={startDate} />
-                        }
-                        {endpoint.everything &&
-                           <DatePicker placeholderText="End Date" value={endDate} onChange={date => setEndDate(date)} selected={endDate} />
-                        }
-                        {endpoint.sources &&
-                           <input type="text" placeholder="Language" value={language} onChange={e => setLanguage(e.target.value)} />}
-                     </div>
-                  </form>
-
+                  <div className="inputfilters">
+                     {endpoint.headlines || endpoint.everything ?
+                        <input type="text" placeholder="Search" value={query} onChange={e => setQuery(e.target.value)} /> : undefined
+                     }
+                     {endpoint.headlines || endpoint.everything ?
+                        <input type="text" placeholder="Sources" value={sources} onChange={e => setSources(e.target.value)} /> : undefined
+                     }
+                     {endpoint.headlines || endpoint.sources ?
+                        <input type="text" placeholder="Category" value={category} onChange={e => setCategory(e.target.value)} /> : undefined
+                     }
+                     {endpoint.headlines || endpoint.sources ?
+                        <input type="text" placeholder="Country" value={country} onChange={e => setCountry(e.target.value)} /> : undefined
+                     }
+                     {endpoint.everything &&
+                        <DatePicker placeholderText="Start Date" value={startDate} onChange={date => setStartDate(date)} selected={startDate} />
+                     }
+                     {endpoint.everything &&
+                        <DatePicker placeholderText="End Date" value={endDate} onChange={date => setEndDate(date)} selected={endDate} />
+                     }
+                     {endpoint.sources &&
+                        <input type="text" placeholder="Language" value={language} onChange={e => setLanguage(e.target.value)} />}
+                  </div>
                </div>
                )}
             </Transition>

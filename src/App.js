@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import './Main.css'
-import { StateProvider } from './state'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { StateProvider } from './state'
 import Navbar from './components/Navbar/navbar.js'
 import Newsfeed from './components/Newsfeed/newsfeed.js'
 import Profile from './components/Profile/profile.js'
-import FeedOptions from './components/FeedOptions/feedoptions'
-import { Transition } from 'react-spring/renderprops'
+import './Main.css'
 
 export default function App() {
 	const initialState = {
@@ -47,10 +45,6 @@ export default function App() {
 					...state,
 					endpoint: action.endpoint
 				}
-			// case 'reset':
-			// 	return {
-			// 		...initialState.endpoint
-			// 	}
 			case 'pass':
 				return {
 					...state,
@@ -60,12 +54,6 @@ export default function App() {
 				return state
 		}
 	}
-
-	const [feed, setFeed] = useState(
-		'https://newsapi.org/v2/top-headlines?country=us&apiKey=569386ab4fcf4954aee7dd0351c13cc0'
-	)
-
-	const KEY = '569386ab4fcf4954aee7dd0351c13cc0';
 
 	const [feedOptionsOpen, setFeedOptionsOpen] = useState(true)
 
@@ -87,18 +75,7 @@ export default function App() {
 							path='/'
 							render={() => (
 								<>
-									<Transition
-										items={feedOptionsOpen}
-										from={{ position: 'relative', marginTop: -500 }}
-										enter={{ position: 'relative', marginTop: 0, opacity: 1 }}
-										leave={{ position: 'relative', marginTop: -500, }}
-										config={{ duration: 200 }}>
-										{feedOptionsOpen => feedOptionsOpen && (props => <div style={props}>
-											<FeedOptions setFeed={setFeed} />
-										</div>
-										)}
-									</Transition>
-									<Newsfeed feed={feed} open={feedOptionsOpen} />
+									<Newsfeed feedOptionsOpen={feedOptionsOpen} />
 								</>
 							)}
 						/>

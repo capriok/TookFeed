@@ -55,7 +55,7 @@ export default function App() {
 		}
 	}
 
-	const [feedOptionsOpen, setFeedOptionsOpen] = useState(true)
+	const [feedOptionsOpen, setFeedOptionsOpen] = useState(false)
 
 	const toggleFeedOptions = () => {
 		setFeedOptionsOpen(!feedOptionsOpen)
@@ -63,6 +63,15 @@ export default function App() {
 			window.scrollTo(0, 0)
 		}
 	}
+
+	useEffect(() => {
+		let authorize = localStorage.getItem('token')
+		if (authorize) {
+			initialState.auth.isAuthenticated = true
+		}
+		console.log('Auth Status', initialState.auth.isAuthenticated);
+		console.log('Welcome to TookFeed')
+	}, [initialState.auth.isAuthenticated])
 
 	return (
 		<StateProvider initialState={initialState} reducer={reducer}>

@@ -7,7 +7,7 @@ import FeedOptions from '../FeedOptions/feedoptions.js'
 import './newsfeed.css'
 
 export default function NewsFeed({ feedOptionsOpen }) {
-	const [{ auth, endpoint, options }, dispatch] = useStateValue()
+	const [{ endpoint }, dispatch] = useStateValue()
 	const [page, setPage] = useState(2)
 	const [start, setStart] = useState(0)
 	const [end, setEnd] = useState(5)
@@ -42,16 +42,24 @@ export default function NewsFeed({ feedOptionsOpen }) {
 			type = `top-${type.shift()}`
 		}
 		let endpointType = type.toString()
+		let country
+
+		if (!endpointType) {
+			endpointType = 'top-headlines'
+			country = 'us'
+		}
 
 		const res = await newsapi
 			.get(`/${endpointType}`, {
 				params: {
 					q: query,
+					country: country,
 					apiKey: KEY
 				}
 			})
-		return setArticles(res.data.articles)
+		console.log(res);
 
+		return setArticles(res.data.articles)
 	}
 
 	const applyOptions = (e) => {
@@ -69,12 +77,13 @@ export default function NewsFeed({ feedOptionsOpen }) {
 			}
 		})
 		request()
+		console.log(query);
+
 	}
 
 	useEffect(() => {
-		console.log(articles);
-		console.log(options);
-	}, [options])
+		request()
+	}, [])
 
 	return (
 		<>
@@ -86,21 +95,10 @@ export default function NewsFeed({ feedOptionsOpen }) {
 				config={{ duration: 200 }}>
 				{feedOptionsOpen => feedOptionsOpen && (props => <div style={props}>
 					<FeedOptions
-						applyOptions={applyOptions}
-						query={query}
-						setQuery={setQuery}
-						sources={sources}
-						setSources={setSources}
-						category={category}
-						setCategory={setCategory}
-						country={country}
-						setCountry={setCountry}
-						startDate={startDate}
-						setStartDate={setStartDate}
-						endDate={endDate}
-						setEndDate={setEndDate}
-						language={language}
-						setLanguage={setLanguage} />
+						applyOptions={applyOptions} query={query} setQuery={setQuery} sources={sources}
+						setSources={setSources} category={category} setCategory={setCategory} country={country}
+						setCountry={setCountry} startDate={startDate} setStartDate={setStartDate} endDate={endDate}
+						setEndDate={setEndDate} language={language} setLanguage={setLanguage} />
 				</div>
 				)}
 			</Transition>

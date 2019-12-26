@@ -8,16 +8,12 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function Filters(
    {
-      query, setQuery,
-      sources, setSources,
-      category, setCategory,
-      country, setCountry,
-      startDate, setStartDate,
-      endDate, setEndDate,
-      language, setLanguage
+      query, setQuery, sources, setSources, category,
+      setCategory, country, setCountry, startDate,
+      setStartDate, endDate, setEndDate, language, setLanguage
    }) {
 
-   const [{ endpoint, options }, dispatch] = useStateValue()
+   const [{ endpoint }, dispatch] = useStateValue()
    const [endpointOpen, setEndpointOpen] = useState(false)
 
    const boxes = ['Everything', 'Headlines', 'Sources']
@@ -38,6 +34,9 @@ export default function Filters(
          case 'sources':
             dispatch({ type: 'filter', endpoint: { everything: false, headlines: false, sources: !endpoint.sources } })
             break;
+
+         default:
+            break;
       }
       setQuery('')
       setSources('')
@@ -49,12 +48,11 @@ export default function Filters(
    }
 
    useEffect(() => {
-      const end = Object.values(endpoint)
-      if (!end.includes(true)) {
+      const type = Object.values(endpoint)
+      if (!type.includes(true)) {
          setEndpointOpen(false)
       }
-
-   }, [handlesetFilters])
+   }, [endpoint])
 
    return (
       <>
@@ -66,7 +64,6 @@ export default function Filters(
                      className="box"
                      type="checkbox"
                      name="everything"
-                     value={e => e.target.name}
                      onChange={handlesetFilters}
                      checked={endpoint.everything}
                   /></div>
@@ -77,7 +74,6 @@ export default function Filters(
                      className="box"
                      type="checkbox"
                      name="headlines"
-                     value={e => e.target.name}
                      onChange={handlesetFilters}
                      checked={endpoint.headlines}
                   /></div>
@@ -88,7 +84,6 @@ export default function Filters(
                      className="box"
                      type="checkbox"
                      name="sources"
-                     value={e => e.target.name}
                      onChange={handlesetFilters}
                      checked={endpoint.sources}
                   /></div>

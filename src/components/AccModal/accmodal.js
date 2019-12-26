@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './accmodal.css'
 import { useStateValue } from '../../state'
 import axios from 'axios'
@@ -11,7 +11,7 @@ function AccModal({ toggleAccModal }) {
 	let reqsPV = document.querySelector('.reqsPV')
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
-	const [auth, dispatch] = useStateValue()
+	const [{ auth }, dispatch] = useStateValue()
 	const [registerOpen, setregisterOpen] = useState(false)
 
 	const toggleRegister = () => {
@@ -107,6 +107,9 @@ function AccModal({ toggleAccModal }) {
 			} else { console.log('Errors found'); }
 		}
 	}
+	useEffect(() => {
+		console.log('Auth Status', auth.isAuthenticated);
+	}, [auth])
 
 	return (
 		<>

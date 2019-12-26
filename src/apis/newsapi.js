@@ -1,5 +1,5 @@
 import axios from 'axios';
-const KEY = '569386ab4fcf4954aee7dd0351c13cc0';
+// const KEY = '569386ab4fcf4954aee7dd0351c13cc0';
 
 ////////////main api key////////////
 //569386ab4fcf4954aee7dd0351c13cc0//

@@ -62,8 +62,8 @@ function AccModal({ toggleAccModal }) {
 			axios
 				.post('http://localhost:5000/users/login', { username: username, password: password })
 				.then(res => {
-					localStorage.setItem('token', res.data.token)
-					localStorage.setItem('user', JSON.stringify(res.data.user))
+					localStorage.setItem('TF-token', res.data.token)
+					localStorage.setItem('TF-user', JSON.stringify(res.data.user))
 					dispatch({
 						type: 'login',
 						auth: {
@@ -72,7 +72,7 @@ function AccModal({ toggleAccModal }) {
 							user: res.data.user
 						}
 					})
-					localStorage.setItem('lastLogin', today)
+					localStorage.setItem('TF-lastLogin', today)
 					toggleAccModal()
 				})
 				.catch((error) => {

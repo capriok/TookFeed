@@ -65,7 +65,7 @@ export default function App() {
 	}
 
 	useEffect(() => {
-		let authorize = localStorage.getItem('token')
+		let authorize = localStorage.getItem('TF-token')
 		if (authorize) {
 			initialState.auth.isAuthenticated = true
 		}

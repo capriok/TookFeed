@@ -44,8 +44,8 @@ function Navbar({ toggleFO }) {
 	}
 
 	useEffect(() => {
-		const token = localStorage.getItem('token')
-		const user = localStorage.getItem('user')
+		const token = localStorage.getItem('TF-token')
+		const user = localStorage.getItem('TF-user')
 		if (token !== null) {
 			dispatch({
 				type: 'login',

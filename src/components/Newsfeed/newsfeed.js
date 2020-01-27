@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useStateValue } from '../../state'
 import { Transition } from 'react-spring/renderprops'
-import badge from './img/badge.png'
+import badge from '../img/badge.png'
 import newsapi from '../apis/newsapi.js'
 import FeedOptions from '../FeedOptions/feedoptions.js'
 import '../stylesheets/newsfeed.css'

@@ -38,8 +38,8 @@ function Navbar({ toggleFO }) {
   )
 
   const logoutUser = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
+    localStorage.removeItem('TF-token')
+    localStorage.removeItem('TF-user')
     window.location.href = '/'
     dispatch({
       type: 'logout'
@@ -80,8 +80,8 @@ function Navbar({ toggleFO }) {
                 <LogoutButton />
               </>
             ) : (
-              <LoginRegsterButton />
-            )}
+                <LoginRegsterButton />
+              )}
           </div>
         </nav>
       </header>

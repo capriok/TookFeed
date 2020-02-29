@@ -15,7 +15,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-	background-color: rgb(50, 50, 50);
+	background-color: rgb(226, 226, 226);
 }
 
 code {
@@ -34,8 +34,8 @@ code {
 	max-width: 800px;
 	min-width: 800px;
 	list-style: none;
-	background-color: rgba(0, 0, 0, 0.5);
-	box-shadow: 0px 0px 10px rgb(255, 255, 255, 0.1);
+	box-shadow: 0px 0px 10px 0px black;
+	background-color: rgb(184, 184, 184);
 }
 
 @keyframes fadeIn {
@@ -57,4 +57,10 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
 	background-color: rgb(0, 0, 0);
+}
+
+@media (max-width: 700px) {
+	html{
+		font-size: 1.2rem;
+	}
 }

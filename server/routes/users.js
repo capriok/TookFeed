@@ -59,6 +59,7 @@ router.route('/delete').post(async (req, res) => {
 	const id = req.body.id
 	try {
 		await User.findByIdAndRemove(id)
+		console.log('Account deleted.');
 	} catch (error) {
 		console.log('No user by that ID.');
 	}

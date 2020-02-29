@@ -18,7 +18,7 @@ export default function Profile() {
   const username = dig.username
   const password = dig.password
   const id = dig._id
-  const getDesc = localStorage.getItem(`${id}description`)
+  const getDesc = localStorage.getItem(`TF-description-${id}`)
 
   const toggleDescInput = () => setDescInputOpen(!descInputOpen)
   const toggleEditUsername = () => setEditUsernameOpen(!editUsernameOpen)
@@ -27,7 +27,7 @@ export default function Profile() {
   const changeUsername = () => toggleEditUsername()
 
   const confirmDescEdit = () => {
-    localStorage.setItem(`${id}description`, description)
+    localStorage.setItem(`TF-description-${id}`, description)
     toggleDescInput()
   }
 
@@ -48,16 +48,16 @@ export default function Profile() {
         Change Username
       </div>
     ) : (
-      <>
-        {' '}
-        <div className='change' onClick={toggleEditUsername}>
-          Cancel
+        <>
+          {' '}
+          <div className='change' onClick={toggleEditUsername}>
+            Cancel
         </div>
-        <div className='change left' onClick={confirmUsernameEdit}>
-          Confirm
+          <div className='change left' onClick={confirmUsernameEdit}>
+            Confirm
         </div>
-      </>
-    )
+        </>
+      )
 
   const confirmUsernameEdit = async () => {
     if (
@@ -84,12 +84,18 @@ export default function Profile() {
     const pop = window.prompt(
       'To delete your account, enter the username below. \n THIS CANNOT BE UNDONE'
     )
-
+    const deleteAccount = async () => {
+      await axios.post('http://localhost:5000/users/delete', { id: id })
+        .then(async res => {
+          console.log(res)
+        }).catch(error => console.log(error))
+    }
     if (pop === username) {
-      axios.post('http://localhost:5000/users/delete', { id: id })
+      deleteAccount()
+      console.log('success');
+      localStorage.removeItem('TF-token')
+      localStorage.removeItem('TF-user')
       window.location.href = '/'
-      localStorage.removeItem('token')
-      localStorage.removeItem('user').catch(error => console.log(error))
       dispatch({
         type: 'logout'
       })

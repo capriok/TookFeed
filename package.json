@@ -12,7 +12,7 @@
 		"concurrently": "^5.0.0",
 		"http-proxy-middleware": "^0.20.0",
 		"jdenticon": "^2.2.0",
-		"jsonwebtoken": "^8.5.1",
+		"jsonwebtoken": "^9.0.0",
 		"newsapi": "^2.4.0",
 		"react": "^16.11.0",
 		"react-datepicker": "^2.10.1",
